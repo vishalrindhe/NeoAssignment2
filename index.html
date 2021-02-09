@@ -222,6 +222,7 @@
 								<ul>
 									<li>
 										<select name="month" class="select month">
+											<option value="month">Month</option>
 											<option value="jan">Jan</option>
 											<option value="feb">Feb</option>
 											<option value="march">March</option>
@@ -238,6 +239,7 @@
 									</li>
 									<li>
 										<select name="day" class="select day">
+											<option value="day">Day</option>
 											<option value="1">01</option>
 											<option value="2">02</option>
 											<option value="3">03</option>
@@ -276,7 +278,22 @@
 
 									<li>
 										<select name="year" class="select year">
-											<option value="volvo">Year</option>
+											<option value="year">Year</option>
+											<option value="1991">1991</option>
+											<option value="1992">1992</option>
+											<option value="1993">1993</option>
+											<option value="1994">1994</option>
+											<option value="1995">1995</option>
+											<option value="1996">1996</option>
+											<option value="1997">1997</option>
+											<option value="1998">1998</option>
+											<option value="1999">1999</option>
+											<option value="1991">1991</option>
+											<option value="1991">1991</option>
+											<option value="1991">1991</option>
+											<option value="1991">1991</option>
+
+
 										</select>
 									</li>
 								</ul>
@@ -285,7 +302,7 @@
 					<li class="fileds">
 						<div class="age_fileds">
 							<label>Age</label>
-							<input name="age" type="text" /> 
+							<input name="age" type="text" value="" disabled /> 
 						</div>
 						<div class="gender_fileds">
 							<label>Gender</label>
@@ -299,14 +316,14 @@
 						<div class="interest_fileds">
 						<label>Interest</label>
 							<ul>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample18" /> <label class="css-label" for="checkbox_sample18">Biking</label></li>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample19" /> <label class="css-label" for="checkbox_sample19">Reading</label></li>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample20" /> <label class="css-label" for="checkbox_sample20">Playing</label></li>
+								<li><input type="checkbox" class="checkbox" id="checkbox_sample18" name="biking" /> <label class="css-label" for="checkbox_sample18">Biking</label></li>
+								<li><input type="checkbox" class="checkbox" id="checkbox_sample19" name="reading" /> <label class="css-label" for="checkbox_sample19">Reading</label></li>
+								<li><input type="checkbox" class="checkbox" id="checkbox_sample20" name="playing" /> <label class="css-label" for="checkbox_sample20">Playing</label></li>
 							</ul>
 						</div>
 						<div class="about_you_fileds">
 						<label>About you</label>
-						<textarea></textarea>
+						<textarea name="aboutYou"></textarea>
 						</div>						
 					</li>
 				</ul>
@@ -317,7 +334,7 @@
 					</button>
 					</div> -->
 					<div class="next_btn">
-						<center><button href="index.html" class ="ttt btn" 
+						<center><button class ="ttt btn" 
 									alt="small_triangle" type="submit">
 									Proceed to Step 2 
 									<span>
