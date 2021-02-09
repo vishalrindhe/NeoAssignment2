@@ -1,0 +1,13 @@
+Firstname - Compulsory 
+Lastname - Compulsory 
+Phone No - Compulsory, Only Nos, exact 10 digit
+Office No - Only Nos
+Email - Compulsory, Email validation
+Password - Compulsory, Range should be between 8 to 12 charachers, should accept only Alphanumeric characters, No Special characters
+Confirm Password - Compulsory, Exactly same as Password
+ DOB - Compulsory
+Age - Dissabled field, It should calculate the Age based on DOB entered above. It should show value as 25.6 years
+Gender - Compulsory
+Interest - It should have min 1 value selected
+
+About you - Compulsory 
