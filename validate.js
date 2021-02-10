@@ -1,3 +1,12 @@
+function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+
 function validateForm() {
     var firstName = document.forms.myForm.firstname.value;
     var lastName = document.forms.myForm.lastname.value;
@@ -16,7 +25,7 @@ function validateForm() {
 
 
     var namePattern = /^[a-zA-Z]{1,20}$/ ;
-    var emailPattern = /[^@]+@[a-zA-Z]+\.[a-z]{2,6}/;
+    var emailPattern = /[^@][^.]+@[a-zA-Z]+\.[a-z]{2,6}/;
     var mobilePattern = /^[7-9][0-9]{9}$/;
     var passwordPattern = /^[a-z A-Z 0-9]{8,12}$/ ;
     // var officePattern = /[0-9]{8}/;
@@ -26,10 +35,11 @@ function validateForm() {
   //   validation for firstName
     if (firstName == "" || firstName == null) {
       alert("First Name must be filled out");
+      // document.forms.myForm.firstname.innerHTML = "plz";
       return false;
     } else if(!namePattern.test(firstName)){
       // else if(!firstName.match(namePattern)){
-      alert("First Name must include only 20 characters");
+      alert("First Name must include onlyz 20 characters");
           return false;
     }
 
@@ -52,8 +62,8 @@ function validateForm() {
       }
 
     // validation of office
-      if(isNaN(office)){
-      alert("Office number must inckude only numbers");
+      if( isNaN(office) || office == " " ){
+      alert("Office number must include only numbers");
           return false;
     }
 
@@ -97,9 +107,18 @@ function validateForm() {
             var days = Math.floor(monthDiff % 31536000000) / 86400000;
             var months = Math.floor(days/30) / 100;
             ageValue = age + months;
+            console.log(ageValue);
 
             // printage(ageValue);
-            document.forms.myForm.age.value = ageValue;
+            if( ageValue <= 0){
+              alert("you have selected future year")
+              return false;
+            } else if(ageValue < 18 ){
+              alert("enter age more than 18");
+              return false;
+            } else{
+              document.forms.myForm.age.value = ageValue;
+            }
           }
           
           // validation for radio button
