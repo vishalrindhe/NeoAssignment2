@@ -1,166 +1,302 @@
+
 function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
-
-function validateForm() {
-    var firstName = document.forms.myForm.firstname.value;
-    var lastName = document.forms.myForm.lastname.value;
-    var email = document.forms.myForm.email.value;
-    var phone = document.forms.myForm.phone.value;
-    var office = document.forms.myForm.office.value;
-    var password = document.forms.myForm.password.value;
-    var rePassword = document.forms.myForm.repassword.value;
-      var aboutYou = document.forms.myForm.aboutYou.value;
-      var dayVal = document.forms.myForm.day.value;
-      var monthVal = document.forms.myForm.month.value;
-      var yearVal = document.forms.myForm.year.value;
-
-      var checkedValid = false;
-      var checkedRadio = false;
-
-
-    var namePattern = /^[a-zA-Z]{1,20}$/ ;
-    var emailPattern = /[^@][^.]+@[a-zA-Z]+\.[a-z]{2,6}/;
-    var mobilePattern = /^[7-9][0-9]{9}$/;
-    var passwordPattern = /^[a-z A-Z 0-9]{8,12}$/ ;
-    // var officePattern = /[0-9]{8}/;
-      var aboutYouPattern = /^[a-z A-Z 0-9]{1,100}$/;
-
-
-  //   validation for firstName
-    if (firstName == "" || firstName == null) {
-      alert("First Name must be filled out");
-      // document.forms.myForm.firstname.innerHTML = "plz";
+{
+   var charCode = (evt.which) ? evt.which : event.keyCode
+   if (charCode > 31 && (charCode < 48 || charCode > 57))
       return false;
-    } else if(!namePattern.test(firstName)){
-      // else if(!firstName.match(namePattern)){
-      alert("First Name must include onlyz 20 characters");
-          return false;
+
+   return true;
+}
+
+var submit=document.getElementById('submit');
+var f_name=document.getElementById('first_name');
+var l_name=document.getElementById('last_name');
+var p_no=document.getElementById('phone_no');
+var office_number = document.getElementById('office_no');
+var email_idx = document.getElementById('email');
+var password_e = document.getElementById('password');
+var password_c = document.getElementById('confirm_password');
+var opt1 = document.getElementById("checkbox_sample18");
+var opt2 = document.getElementById("checkbox_sample19");
+var opt3= document.getElementById("checkbox_sample20");
+var about_u = document.getElementById('about_you');
+var rdio1 = document.getElementById('residence1');
+var rdio2 = document.getElementById('residence2');
+var valid = false;
+const month = document.getElementById('select_month');
+const day = document.getElementById('select_day');
+const year = document.getElementById('select_year');
+const setAge = document.getElementById('age');
+
+
+var namePattern = /^[a-zA-Z]{1,20}$/ ;
+var emailPattern = /[^@][^.]+@[a-zA-Z]+\.[a-z]{2,6}/;
+var mobilePattern = /^[0-9]{10}$/;
+var passwordPattern = /^[a-z A-Z 0-9]{8,12}$/ ;
+// var officePattern = /[0-9]{8}/;
+  var aboutYouPattern = /^[a-z A-Z 0-9]{1,100}$/;
+
+submit.addEventListener('click',function(e){
+    e.preventDefault();
+    validateform();
+    validateform1();
+
+});
+function validateform(){  
+	var f_nameval=f_name.value;
+	var l_nameval=l_name.value;
+	var email_val=email_idx.value;
+	var password_wr=password_e.value;
+	var password_cr=password_c.value;
+	var phone = p_no.value;
+	var office_num = office_number.value;
+	var ab_u = about_u.value;
+	// var opt1 = document.getElementById("checkbox_sample18");
+	// var opt2 = document.getElementById("checkbox_sample19");
+	// var opt3= document.getElementById("checkbox_sample20");
+	// var rdio1 = document.getElementById('residence1');
+	// var rdio2 = document.getElementById('residence2');
+	// var valid = false;
+
+// First Name Validation
+  if (f_nameval == "" || f_nameval == null){  
+    document.getElementById('fname').innerHTML ="Please enter your first name.";
+    // return false;
+    }else if(!namePattern.test(f_nameval)){
+      document.getElementById('fname').innerHTML ="First Name must include only 20 alphabets";
+    }else {
+		document.getElementById('fname').innerHTML ="";
+	}
+
+// Last Name Validation
+  if (l_nameval == "" || l_nameval == null){  
+    document.getElementById('lname').innerHTML ="Please enter your last name.";
+    // return false;
+    }else if(!namePattern.test(l_nameval)){
+      document.getElementById('lname').innerHTML ="Last Name must include only 20 alphabets";
+    }else {
+		document.getElementById('lname').innerHTML ="";
+	}
+
+
+// Phone Number Validation
+if(phone == "" || phone == null){
+	document.getElementById('p_n').innerHTML ="Please enter your phone number.";
+	// return false;
+} else if(!mobilePattern.test(phone)){
+	document.getElementById('p_n').innerHTML ="Phone Number should be exactly 10 digits only.";
+	// return false;
+} else {
+	document.getElementById('p_n').innerHTML ="";
+}
+
+// Office Number Validation
+if(isNaN(office_num) || office_num == " " ){
+	document.getElementById('o_n').innerHTML ="Only Numbers allowed.";
+	// return false;
+}else {
+	document.getElementById('o_n').innerHTML ="";
+}
+
+// Email Validation
+if(email_val == ''){
+	document.getElementById('email_id').innerHTML ="Please enter your email id";
+	// return false;
+}else if (!emailPattern.test(email_val)){
+	document.getElementById('email_id').innerHTML ="Not a mail Id";
+	// return false;
+}else {
+	document.getElementById('email_id').innerHTML ="";
+}
+
+// Password Validation
+if(password_wr == "" || password_wr == null){
+	document.getElementById('p_w').innerHTML ="Please enter your password";
+	// return false;
+} else if(!passwordPattern.test(password_wr)){
+	document.getElementById('p_w').innerHTML ="Password not in valid format. It must be Alphanumeric and between 8 to 12 characters";
+	// return false;
+} else {
+	document.getElementById('p_w').innerHTML ="";
+}
+
+// confirmed password validation
+if(password_cr == "" || password_cr == null){
+	document.getElementById('p_cw').innerHTML ="Please enter your password";
+	// return false;
+}else if(password_wr!=password_cr){
+	document.getElementById('p_cw').innerHTML ="Password doesn't match";
+	// return false;
+}else {
+	document.getElementById('p_cw').innerHTML ="";
+}
+
+
+// About You Validation
+if (ab_u == ''){
+	document.getElementById('a_u').innerHTML ="Enter something about you";
+	// return false;
+}else {
+	document.getElementById('a_u').innerHTML ="";
+}
+
+
+// else{
+// 	ValidateEmail();
+// }
+// Intrest Validation
+// if (!(opt1.checked) && !(opt2.checked) && !(opt3.checked))
+// {
+// 	document.getElementById('intrest_r').innerHTML ="Provide atleast one interest";
+// 	return false;
+// }else {
+// 	document.getElementById('intrest_r').innerHTML ="";
+// }
+
+// 
+
+
+  
+
+
+
+
+
+}
+
+function validateform1(){
+
+  var opt1 = document.getElementById("checkbox_sample18");
+	var opt2 = document.getElementById("checkbox_sample19");
+	var opt3= document.getElementById("checkbox_sample20");
+	var rdio1 = document.getElementById('residence1');
+	var rdio2 = document.getElementById('residence2');
+	var valid = false;
+
+  // DOB & Age Calculation
+
+    // Validate Date---------
+	if ((month.value === 'month') && (day.value === 'day') && (year.value === 'year')){
+    document.getElementById('umar').innerHTML ="Please Enter DOB";
+    // return false;		
+}
+else if (month.value === 'month') {
+    document.getElementById('umar').innerHTML ="Please Select Month";
+    // return false;
+}
+else if (day.value === 'day') {
+    document.getElementById('umar').innerHTML ="Please Select Day";
+    // return false;
+}
+else if (year.value === 'year') {
+    document.getElementById('umar').innerHTML ="Please Select Year";
+    // return false;
+}else{
+document.getElementById('umar').innerHTML ="";
+}
+
+let monthVal = month.value;
+let dayVal = parseInt(day.value);
+let yearVal = parseInt(year.value); 
+
+// Months With 30 days---------------
+
+if (monthVal === 'april' || monthVal == 'june' || monthVal == 'sep' || monthVal == 'nov') {
+    if (dayVal > 30) {
+        document.getElementById('umar').innerHTML ="Invalid Day";
+        return false;
+    }
+}
+
+if (monthVal === 'feb') {
+    let leapYear = false;
+
+    if ( ( !(yearVal % 4) && yearVal % 100) || !(yearVal % 400) ) {
+        leapYear = true;
+    }
+    
+    // if Year is not a Leap year then day should not be greater than 28-----
+
+    if ((leapYear == false) && dayVal >= 29) {
+        document.getElementById('umar').innerHTML ="This is not leap year so Feb cannot have days more than 28";
+        // return false;
     }
 
-      // validation for lastName
-    if (lastName == "" || lastName == null) {
-  	alert("Last Name must be filled out");
-  	return false;
-    }	else if(!namePattern.test(lastName)){
-  	alert("Last Name must include only 20 characters");
-  		return false;
+    // if Year is a Leap year then day should not be greater than 29-----
+
+    if ((leapYear == true) && dayVal > 29) {
+        document.getElementById('umar').innerHTML ="Invalid Date";
+        // return false;
     }
+}
 
-    // validation of phone
-    if (phone == "" || phone == null) {
-        alert("Phone must be filled out");
-        return false;
-      }	else if(!mobilePattern.test(phone)){
-        alert("Phone not in valid format. It must start from 7,8,9");
-            return false;
-      }
+// calculate Age--------
 
-    // validation of office
-      if( isNaN(office) || office == " " ){
-      alert("Office number must include only numbers");
-          return false;
-    }
+let monthIndex = ['jan','feb','march','april','may','june','july','aug','sep','oct','nov','dec'];
 
-    // validation for email
-      if (email == "") {
-          alert("Email must be filled out");
-          return false;
-      } else if (!emailPattern.test(email)) {
-          alert("not a mail id");
-          return false;
-      } 
+//console.log(monthIndex.indexOf(monthVal)+1);
+let crrDate = new Date();
+let birthDate = new Date(yearVal,monthIndex.indexOf(monthVal),dayVal);
+//console.log(crrDate);
+//console.log(birthDate);
 
-      // validation for password
-      if ( password == "" || password == null) {
-        alert("Password must be filled out");
-        return false;
-      }	else if(!passwordPattern.test(password)){
-        alert("Password not in valid format. It must be Alphanumeric and between 8 to 12 characters");
-            return false;
-      }
+let diffInMS = crrDate.valueOf() - birthDate.valueOf();
+//console.log(diffInMS);
 
-      // validation for confirm password
-      if ( rePassword == "" || rePassword == null) {
-        alert("Confirmed password must be filled out");
-        return false;
-      } else if(!(password == rePassword)){
-        alert("Passwords does not match");
-        return false;
-      }
+// ( 1000 * 60 * 60 * 24 * 365.25 ) MilliSec Pre Year
+let age = Math.floor(diffInMS / ( 1000 * 60 * 60 * 24 * 365.25 ) );
+//console.log(age);
 
-                // validation for dob
-          if (yearVal == "year" || monthVal == "month" || dayVal == "day" ) {
-            alert("PLease select date of birth");
-            return false;
-          } else if(yearVal != "year" && monthVal != "month" && dayVal != "day" ) {
-            var monthIndex = ["jan", "feb", "march", "april", "may", "june", "july", "aug", "sep", "oct" ,"nov" ,"dec"];
-            var currentDate = new Date();
-            var dob = new Date(yearVal,monthIndex.indexOf(monthVal),dayVal);
-            var monthDiff = currentDate.valueOf() - dob.valueOf();
-            var age = Math.floor(monthDiff / 31536000000);
-            var days = Math.floor(monthDiff % 31536000000) / 86400000;
-            var months = Math.floor(days/30) / 100;
-            ageValue = age + months;
-            console.log(ageValue);
+// (1000 * 60 * 60 * 24) MilliSec Per Day---
+let days = Math.floor((diffInMS % ( 1000 * 60 * 60 * 24 * 365.25 )) / (1000 * 60 * 60 * 24) ) ;
 
-            // printage(ageValue);
-            if( ageValue <= 0){
-              alert("you have selected future year")
-              return false;
-            } else if(ageValue < 18 ){
-              alert("enter age more than 18");
-              return false;
-            } else{
-              document.forms.myForm.age.value = ageValue;
-            }
-          }
-          
-          // validation for radio button
-          var radioAll = document.forms.myForm.radio;
+//console.log(days);
 
-          for(var i=0; i<radioAll.length; i++){
-            if(radioAll[i].checked){
-              checkedRadio = true;
-              break;
-            }
-          }
+let months = Math.floor(days/30) / 100;
 
-          if(checkedRadio){
-            // return true;
-          } else {
-            alert("Select Gender");
-            return false;
-          }
+//console.log(months);
+//ageValue = `${age}.${months}`;
 
-        
+ageValue = age + months;
+//console.log(ageValue);
 
-          // valdation for checkboxes
-          if (document.forms.myForm.biking.checked) {
-            checkedValid = true;
-          } else if (document.forms.myForm.reading.checked) {
-            checkedValid = true;
-          } else if (document.forms.myForm.playing.checked) {
-            checkedValid = true;
-          } else {
-            alert("Choose atleast one interest field");
-            return false;
-          }
+setAge.value = ageValue;
+//console.log(setAge.value);
+if((ageValue<18)&&(ageValue>=0)){
+document.getElementById('umar').innerHTML = "Your age must be more than 18";
+// return false;
+}
+if(ageValue<0){
+document.getElementById('umar').innerHTML = "Invalid DOB; you've entered future year  ";
+// return false;
+}
+else{
+document.getElementById('age').innerHTML = ageValue+" "+"Years";
+// return true;
+}
 
-          // validation for aboutyou
-          if(aboutYou == "" ||  aboutYou == null){
-            alert("About You field cannot be empty");
-            return false;
-          }
+// validation for radio button
+
+if ((!rdio1.checked) && (!rdio2.checked)){
+document.getElementById('g_d').innerHTML ="Please select your gender";
+// return false;  
+}else {
+document.getElementById('g_d').innerHTML ="";
+}
 
 
+if (opt1.checked) {
+checkedValid = true;
+document.getElementById('intrest_r').innerHTML ="";
+} else if (opt2.checked) {
+checkedValid = true;
+document.getElementById('intrest_r').innerHTML ="";
+} else if (opt3.checked) {
+checkedValid = true;
+document.getElementById('intrest_r').innerHTML ="";
+} else {
+document.getElementById('intrest_r').innerHTML ="Provide atleast one interest";
+// return false;
+}
 
-
-          
-
-  }
+}
