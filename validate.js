@@ -28,11 +28,13 @@ const day = document.getElementById('select_day');
 const year = document.getElementById('select_year');
 const setAge = document.getElementById('age');
 
+var firstName;
+
 
 var namePattern = /^[a-zA-Z]{1,20}$/ ;
-var emailPattern = /[^@][^.]+@[a-zA-Z]+\.[a-z]{2,6}/;
+var emailPattern = /^\D([a-zA-Z0-9+_.-])+[@]+[a-zA-Z0-9]+[.]+[a-z]{2,4}$/;
 var mobilePattern = /^[0-9]{10}$/;
-var passwordPattern = /^[a-z A-Z 0-9]{8,12}$/ ;
+var passwordPattern =/^(?=.*\d)(?=.*[a-z A-Z]).{8,12}$/ ;
 // var officePattern = /[0-9]{8}/;
   var aboutYouPattern = /^[a-z A-Z 0-9]{1,100}$/;
 
@@ -40,12 +42,19 @@ submit.addEventListener('click',function(e){
     e.preventDefault();
     validateform();
     validateform1();
+	submit();
 
 });
+
+function submit(){
+		alert("done");
+
+}
+
 function validateform(){  
-	var f_nameval=f_name.value;
-	var l_nameval=l_name.value;
-	var email_val=email_idx.value;
+	var f_nameval=f_name.value.trim();
+	var l_nameval=l_name.value.trim();
+	var email_val=email_idx.value.trim();
 	var password_wr=password_e.value;
 	var password_cr=password_c.value;
 	var phone = p_no.value;
@@ -62,18 +71,25 @@ function validateform(){
   if (f_nameval == "" || f_nameval == null){  
     document.getElementById('fname').innerHTML ="Please enter your first name.";
     // return false;
-    }else if(!namePattern.test(f_nameval)){
-      document.getElementById('fname').innerHTML ="First Name must include only 20 alphabets";
+	// firstName = false;
+    } else if (f_nameval.length > 20) {
+		document.getElementById('fname').innerHTML ="First Name accept maximum 20 alphabets";
+	} else if(!namePattern.test(f_nameval)){
+      document.getElementById('fname').innerHTML ="First Name accept only alphabets";
+	//   firstName = false;
     }else {
 		document.getElementById('fname').innerHTML ="";
+		// firstName = true;
 	}
 
 // Last Name Validation
   if (l_nameval == "" || l_nameval == null){  
     document.getElementById('lname').innerHTML ="Please enter your last name.";
     // return false;
-    }else if(!namePattern.test(l_nameval)){
-      document.getElementById('lname').innerHTML ="Last Name must include only 20 alphabets";
+    }else if (l_nameval.length > 20) {
+		document.getElementById('lname').innerHTML ="First Name accept maximum 20 alphabets";
+	}else if(!namePattern.test(l_nameval)){
+      document.getElementById('lname').innerHTML ="Last Name accept only alphabets";
     }else {
 		document.getElementById('lname').innerHTML ="";
 	}
@@ -83,6 +99,8 @@ function validateform(){
 if(phone == "" || phone == null){
 	document.getElementById('p_n').innerHTML ="Please enter your phone number.";
 	// return false;
+} else if(isNaN(phone)){
+	document.getElementById('p_n').innerHTML ="Phone accept only numbers";
 } else if(!mobilePattern.test(phone)){
 	document.getElementById('p_n').innerHTML ="Phone Number should be exactly 10 digits only.";
 	// return false;
@@ -113,6 +131,8 @@ if(email_val == ''){
 if(password_wr == "" || password_wr == null){
 	document.getElementById('p_w').innerHTML ="Please enter your password";
 	// return false;
+} else if(password_wr.length < 8){	
+	document.getElementById('p_w').innerHTML ="Password length must more than 8";
 } else if(!passwordPattern.test(password_wr)){
 	document.getElementById('p_w').innerHTML ="Password not in valid format. It must be Alphanumeric and between 8 to 12 characters";
 	// return false;
@@ -133,10 +153,13 @@ if(password_cr == "" || password_cr == null){
 
 
 // About You Validation
-if (ab_u == ''){
+if (ab_u == '' || ab_u == !/[^ ]/){
 	document.getElementById('a_u').innerHTML ="Enter something about you";
 	// return false;
-}else {
+}  else if(!aboutYouPattern.test(ab_u)){
+	document.getElementById('a_u').innerHTML ="Enter something about you";
+
+}	else{
 	document.getElementById('a_u').innerHTML ="";
 }
 
@@ -176,40 +199,44 @@ function validateform1(){
   // DOB & Age Calculation
 
     // Validate Date---------
-	if ((month.value === 'month') && (day.value === 'day') && (year.value === 'year')){
-    document.getElementById('umar').innerHTML ="Please Enter DOB";
-    // return false;		
-}
-else if (month.value === 'month') {
+// 	if ((month.value === 'month') && (day.value === 'day') && (year.value === 'year')){
+//     document.getElementById('umar').innerHTML ="Please Enter DOB";
+//     // return false;		
+// }
+// else 
+if (month.value == 'month') {
     document.getElementById('umar').innerHTML ="Please Select Month";
-    // return false;
-}
-else if (day.value === 'day') {
+    return false;
+	setAge.value = " ";
+} else if (day.value == 'day') {
     document.getElementById('umar').innerHTML ="Please Select Day";
-    // return false;
-}
-else if (year.value === 'year') {
+    return false;
+	setAge.value = " ";
+} else if (year.value == 'year') {
     document.getElementById('umar').innerHTML ="Please Select Year";
-    // return false;
-}else{
-document.getElementById('umar').innerHTML ="";
+    return false;
+	setAge.value = " ";
+} else{
+	document.getElementById('umar').innerHTML ="";
+	// return true;
 }
 
-let monthVal = month.value;
-let dayVal = parseInt(day.value);
-let yearVal = parseInt(year.value); 
+var monthVal = month.value;
+var dayVal = parseInt(day.value);
+var yearVal = parseInt(year.value); 
+ageValue = 0;
 
 // Months With 30 days---------------
 
 if (monthVal === 'april' || monthVal == 'june' || monthVal == 'sep' || monthVal == 'nov') {
     if (dayVal > 30) {
-        document.getElementById('umar').innerHTML ="Invalid Day";
-        return false;
+        document.getElementById('umar').innerHTML ="These are 30 day months";
+        // return false;
     }
 }
 
 if (monthVal === 'feb') {
-    let leapYear = false;
+    var leapYear = false;
 
     if ( ( !(yearVal % 4) && yearVal % 100) || !(yearVal % 400) ) {
         leapYear = true;
@@ -225,55 +252,70 @@ if (monthVal === 'feb') {
     // if Year is a Leap year then day should not be greater than 29-----
 
     if ((leapYear == true) && dayVal > 29) {
-        document.getElementById('umar').innerHTML ="Invalid Date";
+        document.getElementById('umar').innerHTML =" Feb cannot have days more than 29";
         // return false;
     }
 }
 
 // calculate Age--------
 
-let monthIndex = ['jan','feb','march','april','may','june','july','aug','sep','oct','nov','dec'];
+var monthIndex = ['jan','feb','march','april','may','june','july','aug','sep','oct','nov','dec'];
 
 //console.log(monthIndex.indexOf(monthVal)+1);
-let crrDate = new Date();
-let birthDate = new Date(yearVal,monthIndex.indexOf(monthVal),dayVal);
+var crrDate = new Date();
+var birthDate = new Date(yearVal,monthIndex.indexOf(monthVal),dayVal);
 //console.log(crrDate);
 //console.log(birthDate);
 
-let diffInMS = crrDate.valueOf() - birthDate.valueOf();
+var diffInMS = crrDate.valueOf() - birthDate.valueOf();
 //console.log(diffInMS);
 
 // ( 1000 * 60 * 60 * 24 * 365.25 ) MilliSec Pre Year
-let age = Math.floor(diffInMS / ( 1000 * 60 * 60 * 24 * 365.25 ) );
+var age = Math.floor(diffInMS / ( 1000 * 60 * 60 * 24 * 365.25 ) );
 //console.log(age);
 
 // (1000 * 60 * 60 * 24) MilliSec Per Day---
-let days = Math.floor((diffInMS % ( 1000 * 60 * 60 * 24 * 365.25 )) / (1000 * 60 * 60 * 24) ) ;
+var days = Math.floor((diffInMS % ( 1000 * 60 * 60 * 24 * 365.25 )) / (1000 * 60 * 60 * 24) ) ;
 
 //console.log(days);
+var months = ((days/30) / 100);
+// var months = Math.floor(days/30) / 100;
 
-let months = Math.floor(days/30) / 100;
-
-//console.log(months);
+console.log(months);
 //ageValue = `${age}.${months}`;
 
-ageValue = age + months;
+ageV = age + months;
+ageValue = ageV.toFixed(2)
 //console.log(ageValue);
 
-setAge.value = ageValue;
+// setAge.value = ageValue;
 //console.log(setAge.value);
-if((ageValue<18)&&(ageValue>=0)){
+if((ageValue<18)&&(ageValue>=1)){
 document.getElementById('umar').innerHTML = "Your age must be more than 18";
+// return ageValue = 0;
 // return false;
-}
-if(ageValue<0){
+setAge.value = " ";
+} else if(ageValue<0){
 document.getElementById('umar').innerHTML = "Invalid DOB; you've entered future year  ";
 // return false;
-}
-else{
-document.getElementById('age').innerHTML = ageValue+" "+"Years";
+// return false;
+setAge.value = " ";
+// ageValue = " ";
+} else{
+document.getElementById('age').value = ageValue+" "+"Years";
+// setAge.value = ageValue;
+// document.getElementById("age").value = ageValue;
 // return true;
 }
+
+// if(ageValue<0){
+// 	document.getElementById('ageid').innerHTML = "Invalid Date of birth";
+// 	ageValue = " ";
+// 	// return false;
+// }else{
+// 	document.getElementById('age').innerHTML = ageValue+" "+"Years";
+// 	// return true;
+// }
 
 // validation for radio button
 

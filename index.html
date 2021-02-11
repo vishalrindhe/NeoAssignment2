@@ -172,12 +172,12 @@
 							<label>First Name<sup style="color: red;">*</sup></label>
 						
 							<input name="firstname" type="text" id="first_name"/>
-							<span class="text-danger font-weight-bold" style="color: red;" id="fname"></span> 
+							<small class="text-danger font-weight-bold" style="color: red;" id="fname"></small> 
 						</div>
 						<div class="name_fileds">
 							<label>Last Name<sup style="color: red;">*</sup></label>
 							<input name="lastname" type="text" id="last_name"/>
-							<span class="text-danger font-weight-bold" style="color: red;" id="lname"></span> 
+							<small class="text-danger font-weight-bold" style="color: red;" id="lname"></small> 
 						</div>
 					</li>
 					<li class="fileds">
@@ -201,11 +201,11 @@
 						<div class="pass_fileds">
 							<div style="display: inline;">
 								<p style="display: inline-flexbox;">
-								<label>Password<sup style="color: red;">*</sup></label>
-									<div class="tooltip">
+								<label>Password<sup style="color: red;">*</sup><small>( Combination of 8 to 12 Alphanumeric characters. )</small></label>
+									<!-- <div class="tooltip">
 										<i class="fa fa-question-circle-o" style="color:red;"></i>
 										<span class="tooltiptext">Password must contain any combination of 8 to 12 Alphanumeric characters.</span>
-									</div>
+									</div> -->
 								</p>
 							</div>
 							<input name="password" type="text" id="password" />
@@ -343,15 +343,15 @@
 						<div class="age_fileds">
 							<label>Age</label>
 							<!-- <span class="text-danger font-weight-bold" style="color: black" id="age"></span> -->
-							<input name="age" type="text" value="" id="age" disabled /> 
+							<input name="age" type="text"  id="age" disabled /> 
 						</div>
 						<div class="gender_fileds">
 							<label>Gender<sup style="color: red;">*</sup></label>
-							<span class="text-danger font-weight-bold" style="color: red;" id="g_d"></span>
 							<ul>
 								<li><input type="radio" class="radio" id="residence1" name="radio" id="radio" /><label class="radio-label" for="residence1">Male</label></li>
 								<li><input type="radio" class="radio" id="residence2" name="radio" id="radio" /><label class="radio-label" for="residence2">Female</label></li>
-							</ul>
+							</ul><br>
+							<small class="text-danger font-weight-bold" style="color: red;" id="g_d"></small>
 							
 						</div>
 					</li>
@@ -374,7 +374,7 @@
 				</ul>
 				<div class="next_btn_block">
 					<div class="next_btn">
-						<a href="partners_preference_form.html" id="submit">Proceed to Step 2 <span><img src="images/small_triangle.png" alt="small_triangle"> </span></a>
+						<a href="partners_preference_form.html" id="submit"  onsubmit="submit()">Proceed to Step 2 <span><img src="images/small_triangle.png" alt="small_triangle"> </span></a>
 					</div>
 				</div>
 			</div>
